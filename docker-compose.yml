@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  service_1:
+    build: ./service_1
+   
+    ports:
+      - "5000:5000"
+
+  service_2:
+    build: ./service_2
+   
+    ports:
+      - "8000:8000"
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - service_1
+      - service_2
+
